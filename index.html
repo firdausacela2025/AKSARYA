@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKSARYA - Dari Aksara, Tumbuh Karya Nyata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #ffffff;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8e8e8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #a8dadc;
+        }
+
+        /* User Account Menu */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-menu-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0.5rem;
+            transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .user-menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s;
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .user-menu-toggle:hover span {
+            background: #a8dadc;
+        }
+
+        .user-icon {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            min-width: 280px;
+            z-index: 1001;
+            display: none;
+        }
+
+        .user-dropdown.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-dropdown-header {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .user-dropdown-header h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: #1a1a2e;
+        }
+
+        .user-dropdown-header p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #667788;
+            line-height: 1.6;
+        }
+
+        .user-dropdown-menu {
+            padding: 1rem;
+        }
+
+        .user-dropdown-menu .btn-primary,
+        .user-dropdown-menu .btn-secondary {
+            display: block;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .user-dropdown-menu .btn-primary {
+            background: #1a1a2e;
+            color: white;
+            margin-bottom: 0.8rem;
+        }
+
+        .user-dropdown-menu .btn-primary:hover {
+            background: #16213e;
+            transform: translateY(-2px);
+        }
+
+        .user-dropdown-menu .btn-secondary {
+            background: white;
+            color: #1a1a2e;
+            border: 2px solid #1a1a2e;
+        }
+
+        .user-dropdown-menu .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .user-dropdown-footer {
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid #e8e8e8;
+            font-size: 0.85rem;
+            color: #889;
+        }
+
+        .user-dropdown-footer a {
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .user-dropdown-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 180px 2rem 120px;
+            text-align: center;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%231a1a2e;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%2316213e;stop-opacity:0.1" /></linearGradient></defs><path d="M0,200 Q300,100 600,200 T1200,200 L1200,600 L0,600 Z" fill="url(%23grad)" opacity="0.3"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .hero .subheadline {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #e8e8e8;
+            font-weight: 300;
+        }
+
+        .hero .positioning {
+            font-size: 1.05rem;
+            color: #b8c5d6;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #445566;
+            line-height: 1.9;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-visual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-visual img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-visual img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #556677;
+            line-height: 1.7;
+        }
+
+        /* Values Section */
+        .values {
+            background: #f8f9fa;
+        }
+
+        .values-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #1a1a2e;
+        }
+
+        .value-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #1a1a2e;
+        }
+
+        .value-item p {
+            font-size: 1rem;
+            color: #556677;
+            margin: 0;
+        }
+
+        /* Audience Section */
+        .audience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+
+        .audience-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .audience-card p {
+            font-size: 1rem;
+            color: #556677;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 2rem;
+        }
+
+        .cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            color: #e8e8e8;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: white;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+
+        .btn:hover {
+            background: #a8dadc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f1e;
+            color: #b8c5d6;
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #b8c5d6;
+        }
+
+        /* Responsive */
+        /* Floating CTA Popup - Simple */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+            animation: slideIn 0.5s ease-out;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .floating-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+            background: #16213e;
+        }
+
+        .floating-cta.hidden {
+            display: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .floating-cta-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: white;
+            margin: 0;
+        }
+
+        .floating-cta-close {
+            background: none;
+            border: none;
+            color: #b8c5d6;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+            margin-left: 0.5rem;
+        }
+
+        .floating-cta-close:hover {
+            color: white;
+        }
+
+        .floating-cta a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subheadline {
+                font-size: 1.1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .user-menu-toggle {
+                padding: 0.7rem;
+            }
+
+            .user-menu-toggle span {
+                width: 26px;
+                height: 3px;
+            }
+
+            .user-dropdown {
+                position: fixed;
+                top: 70px;
+                right: 20px;
+                left: 20px;
+                min-width: auto;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            section {
+                padding: 60px 1.5rem;
+            }
+
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.9rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .about-visual {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">AKSARYA</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#produk">Produk</a></li>
+                    <li><a href="#nilai">Nilai</a></li>
+                    <li><a href="#audiens">Untuk Siapa</a></li>
+                </ul>
+                
+                <!-- User Account Menu -->
+                <div class="user-menu">
+                    <button class="user-menu-toggle" onclick="toggleUserMenu()" aria-label="Menu Akun">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-dropdown-header">
+                            <h3>Selamat Datang</h3>
+                            <p>Kelola akun AKSARYA Anda untuk mengakses produk dan melacak pembelajaran Anda.</p>
+                        </div>
+                        <div class="user-dropdown-menu">
+                            <a href="#daftar" class="btn-primary">Buat Akun</a>
+                            <a href="#masuk" class="btn-secondary">Masuk</a>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            Sudah punya akun? <a href="#masuk">Masuk di sini</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Dari Aksara, Tumbuh Karya Nyata</h1>
+            <p class="subheadline">Sumber pengetahuan digital yang membantu Anda berpikir jernih dan bergerak pasti.</p>
+            <p class="positioning">AKSARYA hadir untuk individu dan pelaku usaha Indonesia yang percaya bahwa belajar adalah proses, dan pengetahuan hanya bermakna ketika diterapkan.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="about">
+        <h2>Tentang AKSARYA</h2>
+        
+        <div class="about-visual">
+            <img src="https://i.imgur.com/placeholder1.png" alt="Belajar dengan struktur yang jelas" onerror="this.style.display='none'">
+            <img src="https://i.imgur.com/placeholder2.png" alt="Menulis dan mengeksekusi ide" onerror="this.style.display='none'">
+        </div>
+        
+        <p>AKSARYA lahir dari keyakinan sederhana: pengetahuan yang baik harus bisa diakses, dipahami, dan diterapkan. Di tengah banjir informasi digital yang sering kali dangkal atau tidak kontekstual, kami memilih jalur berbeda—menyusun sumber belajar yang terstruktur, relevan dengan realitas Indonesia, dan menghargai waktu Anda.</p>
+        
+        <p>Nama kami adalah gabungan dari "aksara" dan "karya". Aksara melambangkan pengetahuan, pemikiran, dan literasi. Karya adalah wujud nyata dari apa yang telah dipelajari—produk, keputusan, atau perubahan yang terukur. Kami percaya, belajar tanpa eksekusi hanyalah teori. Eksekusi tanpa pemahaman hanyalah coba-coba. AKSARYA menjembatani keduanya.</p>
+        
+        <p>Kami tidak menjanjikan jalan pintas. Kami menawarkan jalur yang lebih jelas. Untuk profesional pemula yang ingin memperdalam kemampuan. Untuk pelaku UMKM yang butuh fondasi strategis. Untuk siapa pun yang ingin bertumbuh dengan cara yang terukur dan bermakna.</p>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produk">
+        <h2>Apa yang Kami Buat</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <h3>E-book Digital</h3>
+                <p>Panduan terstruktur yang membahas satu topik secara mendalam—dari konsep hingga penerapan. Ditulis dalam bahasa Indonesia yang lugas, dengan contoh dan kerangka kerja yang bisa langsung Anda gunakan.</p>
+            </div>
+            <div class="product-card">
+                <h3>Template & Framework</h3>
+                <p>Alat bantu praktis yang mempercepat eksekusi—dari template strategi konten, perencanaan bisnis, hingga kerangka analisis sederhana. Dirancang untuk menghemat waktu Anda dalam berpikir dan mengeksekusi.</p>
+            </div>
+            <div class="product-card">
+                <h3>Mini Course Online</h3>
+                <p>Materi belajar terstruktur dengan video, modul, dan latihan. Fokus pada penguasaan keterampilan spesifik yang aplikatif untuk profesional dan pelaku usaha di Indonesia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="nilai" class="values">
+        <h2>Nilai yang Kami Pegang</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <h3>Kejelasan di Atas Segalanya</h3>
+                <p>Kami percaya pengetahuan yang baik adalah pengetahuan yang bisa dipahami dan diterapkan, bukan yang terdengar rumit.</p>
+            </div>
+            <div class="value-item">
+                <h3>Relevansi dengan Konteks Lokal</h3>
+                <p>Setiap produk kami mempertimbangkan realitas pasar, budaya kerja, dan tantangan yang dihadapi individu dan bisnis di Indonesia.</p>
+            </div>
+            <div class="value-item">
+                <h3>Kepraktisan Tanpa Mengorbankan Kedalaman</h3>
+                <p>Kami tidak menyederhanakan secara berlebihan, tetapi juga tidak memperumit yang sederhana—keseimbangan adalah kunci.</p>
+            </div>
+            <div class="value-item">
+                <h3>Integritas dalam Setiap Klaim</h3>
+                <p>Kami tidak menjanjikan hasil instan, kesuksesan otomatis, atau solusi ajaib—kami menawarkan fondasi yang kokoh untuk bertumbuh.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audience Section -->
+    <section id="audiens">
+        <h2>Untuk Siapa AKSARYA</h2>
+        <div class="audience-grid">
+            <div class="audience-card">
+                <h3>Individu yang Ingin Bertumbuh dengan Cara yang Terukur</h3>
+                <p>Anda belajar bukan hanya untuk tahu, tetapi untuk bisa. Anda mencari sumber yang tidak hanya memberikan informasi, tetapi juga struktur berpikir dan langkah kerja yang jelas.</p>
+            </div>
+            <div class="audience-card">
+                <h3>Pelaku UMKM yang Butuh Fondasi Strategis</h3>
+                <p>Anda sedang membangun atau mengembangkan usaha, dan membutuhkan pengetahuan praktis yang bisa langsung diterapkan—tanpa harus mengikuti pelatihan mahal atau membaca teori bisnis yang terlalu akademis.</p>
+            </div>
+            <div class="audience-card">
+                <h3>Profesional Pemula yang Ingin Memperdalam Keahlian</h3>
+                <p>Anda baru memulai karier atau sedang beralih bidang, dan memerlukan panduan yang relevan, aplikatif, dan disusun dengan cara yang mudah diikuti.</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2.5rem; font-style: italic; color: #445566;">Jika Anda menghargai proses belajar yang serius, tetapi tidak kaku—AKSARYA ada untuk Anda.</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Mulai dari Satu Langkah</h2>
+        <p>Pengetahuan yang baik tidak harus mahal atau rumit. Jelajahi koleksi produk kami, pilih satu yang paling relevan dengan kebutuhan Anda hari ini, dan mulai proses bertumbuh dengan cara yang lebih jelas.</p>
+        <a href="#produk" class="btn">Jelajahi Produk Kami</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AKSARYA. Pengetahuan yang bergerak, untuk Indonesia yang bertumbuh.</p>
+    </footer>
+
+    <!-- Floating CTA Popup - Simple -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="#produk" onclick="closeFloatingCta()">
+            <p class="floating-cta-text">Jelajahi Produk Kami</p>
+        </a>
+        <button class="floating-cta-close" onclick="closeFloatingCta()">&times;</button>
+    </div>
+
+    <script>
+        // Toggle User Menu - Mobile Compatible
+        function toggleUserMenu(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            var dropdown = document.getElementById('userDropdown');
+            if (dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            } else {
+                dropdown.classList.add('active');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('touchstart', function(event) {
+            var userMenu = document.querySelector('.user-menu');
+            var dropdown = document.getElementById('userDropdown');
+            
+            if (dropdown && dropdown.classList.contains('active') && !userMenu.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            var userMenu = document.querySelector('.user-menu');
+            var dropdown = document.getElementById('userDropdown');
+            
+            if (dropdown && dropdown.classList.contains('active') && !userMenu.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Show floating CTA after 3 seconds
+        setTimeout(function() {
+            var floatingCta = document.getElementById('floatingCta');
+            if (floatingCta) {
+                floatingCta.style.display = 'flex';
+            }
+        }, 3000);
+
+        // Close floating CTA
+        function closeFloatingCta() {
+            var floatingCta = document.getElementById('floatingCta');
+            if (floatingCta) {
+                floatingCta.classList.add('hidden');
+            }
+        }
+
+        // Hide floating CTA when scrolled to CTA section
+        window.addEventListener('scroll', function() {
+            var ctaSection = document.querySelector('.cta');
+            var floatingCta = document.getElementById('floatingCta');
+            
+            if (ctaSection && floatingCta) {
+                var ctaPosition = ctaSection.getBoundingClientRect();
+                if (ctaPosition.top < window.innerHeight) {
+                    floatingCta.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
